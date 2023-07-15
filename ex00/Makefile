@@ -3,8 +3,8 @@ CPP		= c++ -fsanitize=address
 FLAGS	= -Wall -Wextra -Werror -std=c++98
 RM		= rm -f
 
-SRC		= main.cpp btc.cpp
-INC		= btc.hpp
+SRC		= main.cpp BitcoinExchange.cpp
+INC		= BitcoinExchange.hpp
 
 OBJ		= $(SRC:%.cpp=%.o)
 
