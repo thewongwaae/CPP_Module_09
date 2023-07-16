@@ -4,11 +4,13 @@
 
 #include <string>
 #include <iostream>
-#include <list>
+#include <sstream>
+#include <stdlib.h>
+#include <stack>
 
 class RPN {
 	private:
-		std::list< std::string > _input;
+		std::stack< int > _stack;
 
 	public:
 		RPN( void );
@@ -16,5 +18,7 @@ class RPN {
 		RPN &operator=( RPN const &assign );
 		~RPN( void );
 
-		void		calculate( std::string input );
+		void do_op( std::string const &op );
+		void calculate( std::string const &input );
+		int result( void ) const;
 };
