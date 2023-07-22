@@ -10,23 +10,14 @@
 #include <iterator>
 
 class PmergeMe {
-	private:
-		std::vector< int > _vector;
-		std::list< int > _list;
-
 	public:
 		PmergeMe( void );
 		PmergeMe( PmergeMe const &copy );
 		PmergeMe &operator=( PmergeMe const &assign );
 		~PmergeMe( void );
-
-		void queueNumbers( std::list<int>::iterator begin, std::list<int>::iterator end );
-
+		
 		template <template <typename...> class Container>
 		void fordJohnson( Container< int > &cont );
-
-		const std::vector< int > &getVector( void ) const;
-		const std::list< int > &getList( void ) const;
 };
 
 std::ostream &operator<<( std::ostream &o, std::vector<int> vector );

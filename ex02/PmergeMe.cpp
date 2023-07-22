@@ -21,11 +21,6 @@ PmergeMe::~PmergeMe( void ) {}
 
 /* Members */
 
-void PmergeMe::queueNumbers( std::list<int>::iterator begin, std::list<int>::iterator end ) {
-	_list.insert(_list.end(), begin, end);
-	_vector.insert(_vector.end(), begin, end);
-}
-
 template <typename Container>
 static bool isSorted(const Container& cont)
 {
@@ -148,16 +143,6 @@ void PmergeMe::fordJohnson( Container< int > &cont ) {
 		cont.insert(std::lower_bound(cont.begin(), cont.end(), *it1), *it1);
 	if (odd_flag)
 		cont.insert(std::lower_bound(cont.begin(), cont.end(), odd), odd);
-}
-
-/* Getters */
-
-const std::vector< int > &PmergeMe::getVector( void ) const {
-	return _vector;
-}
-
-const std::list< int > &PmergeMe::getList( void ) const {
-	return _list;
 }
 
 /* Overloads */
