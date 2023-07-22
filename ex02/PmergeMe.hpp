@@ -21,11 +21,13 @@ class PmergeMe {
 		~PmergeMe( void );
 
 		void queueNumbers( std::list<int>::iterator begin, std::list<int>::iterator end );
+
+		template <template <typename...> class Container>
 		void fordJohnson( void );
 
 		const std::vector< int > &getVector( void ) const;
 		const std::list< int > &getList( void ) const;
 };
 
-std::ostream &operator<<( std::ostream &o, std::vector<int> const vector );
-std::ostream &operator<<( std::ostream &o, std::list<int> const list );
+std::ostream &operator<<( std::ostream &o, std::vector<int> vector );
+std::ostream &operator<<( std::ostream &o, std::list<int> list );
