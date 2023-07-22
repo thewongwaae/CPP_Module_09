@@ -23,7 +23,7 @@ class PmergeMe {
 		void queueNumbers( std::list<int>::iterator begin, std::list<int>::iterator end );
 
 		template <template <typename...> class Container>
-		void fordJohnson( void );
+		void fordJohnson( Container< int > &cont );
 
 		const std::vector< int > &getVector( void ) const;
 		const std::list< int > &getList( void ) const;
