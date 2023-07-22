@@ -1,14 +1,18 @@
 #pragma once
 
-// https://en.cppreference.com/w/cpp/container/deque
+// https://en.cppreference.com/w/cpp/container/list
+// https://en.cppreference.com/w/cpp/container/vector  
 
-#include <string>
 #include <iostream>
-#include <deque>
+#include <vector>
+#include <list>
+#include <algorithm>
+#include <iterator>
 
 class PmergeMe {
 	private:
-		std::deque< int > _input;
+		std::vector< int > _vector;
+		std::list< int > _list;
 
 	public:
 		PmergeMe( void );
@@ -16,5 +20,12 @@ class PmergeMe {
 		PmergeMe &operator=( PmergeMe const &assign );
 		~PmergeMe( void );
 
-		void		calculate( std::string input );
+		void queueNumbers( std::list<int>::iterator begin, std::list<int>::iterator end );
+		void fordJohnson( void );
+
+		const std::vector< int > &getVector( void ) const;
+		const std::list< int > &getList( void ) const;
 };
+
+std::ostream &operator<<( std::ostream &o, std::vector<int> const vector );
+std::ostream &operator<<( std::ostream &o, std::list<int> const list );
