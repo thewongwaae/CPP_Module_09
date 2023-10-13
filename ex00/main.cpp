@@ -41,7 +41,7 @@ static int parseInput( BitcoinExchange &btc, char *filename ) {
 
 	file.open(filename, std::fstream::in);
 	if (!file.is_open()) {
-		std::cerr << "Error: could not open " << file << std::endl;
+		std::cerr << "Error: could not open " << filename << std::endl;
 		return 1;
 	}
 
@@ -60,7 +60,7 @@ static int parseInput( BitcoinExchange &btc, char *filename ) {
 
 		if (validDate(date) && validPrice(value)) {
 			price = btc.calculatePrice(date, atof(value.c_str()));
-			std::cout << date << " " << price << std::endl;
+			std::cout << date << " =>" << value << " = " << price << std::endl;
 		}
 	}
 	file.close();

@@ -2,7 +2,7 @@
 
 /* Constructs */
 
-BitcoinExchange::BitcoinExchange( void ) {}
+BitcoinExchange::BitcoinExchange( void ) { }
 
 BitcoinExchange::BitcoinExchange( BitcoinExchange const &copy ) {
 	*this = copy;
@@ -14,15 +14,11 @@ BitcoinExchange &BitcoinExchange::operator=( BitcoinExchange const &copy ) {
 	return *this;
 }
 
-BitcoinExchange::~BitcoinExchange( void ) {}
+BitcoinExchange::~BitcoinExchange( void ) { }
 
 /* Members / Modifiers */
 
 void BitcoinExchange::push( std::string const date, std::string const price ) {
-	if (!validDate(date) || !validPrice(price))
-		return;
-
-	// this->_data[date] = atof(price.c_str()); // this assumes the key exists
 	this->_data.insert(std::pair< std::string, float >(date, atof(price.c_str()))); // this will only insert if the key doesn't exist
 }
 
@@ -38,7 +34,7 @@ float BitcoinExchange::calculatePrice( std::string date, float amount ) {
 	std::map< std::string, float >::iterator pair = this->_data.lower_bound(date);
 
 	if (pair == this->_data.end()) {
-		std::cerr << "Error: out of range" << std::endl;
+		std::cerr << "Error: Out of range" << std::endl;
 		return 0;
 	}
 	return (amount * pair->second);
@@ -56,7 +52,7 @@ bool validDate( std::string const date ) {
 	int month = atoi(date.substr(5, 2).c_str());
 	int day = atoi(date.substr(8, 2).c_str());
 
-	if (year < 2009 || year > 2025 || month < 1 || month > 12 || day < 1 || day > 31) {
+	if (year < 2009 || year > 2022 || month < 1 || month > 12 || day < 1 || day > 31) {
 		std::cerr << "Error: invalid date value" << std::endl;
 		return false;
 	}
@@ -65,7 +61,7 @@ bool validDate( std::string const date ) {
 }
 
 bool validPrice( std::string const price ) {
-	float num;
+	float num = 0;
 
 	try
 	{
@@ -73,12 +69,17 @@ bool validPrice( std::string const price ) {
 	}
 	catch (std::out_of_range const &e)
 	{
-		std::cerr << "Error: out of range" << std::endl;
+		std::cerr << "Error: Out of range" << std::endl;
 		return false;
 	}
 	
 	if (num < 0) {
-		std::cerr << "Error: negative price" << std::endl;
+		std::cerr << "Error: Negative value" << std::endl;
+		return false;
+	}
+
+	if (num > 1000) {
+		std::cerr << "Error: Value too large" << std::endl;
 		return false;
 	}
 
