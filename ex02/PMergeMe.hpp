@@ -23,3 +23,6 @@ class PMergeMe {
 		void	fordJohnson( std::vector< int > &vector );
 		void	fordJohnson( std::list< int > &list );
 };
+
+std::ostream &operator<<( std::ostream &o, std::vector< int > &vector );
+std::ostream &operator<<( std::ostream &o, std::list< int > &list );

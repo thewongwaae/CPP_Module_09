@@ -234,3 +234,25 @@ void PMergeMe::fordJohnson( std::list< int > &list ) {
 	if (!std::is_sorted(list.begin(), list.end()))
 		throw std::logic_error("List is not sorted");
 }
+
+/* Operators */
+
+std::ostream &operator<<( std::ostream &o, std::vector< int > &vector ) {
+	for (std::vector< int >::iterator it = vector.begin(); it != vector.end(); it++) {
+		if (it != vector.begin())
+			o << ", ";
+		o << *it;
+	}
+
+	return (o);
+}
+
+std::ostream &operator<<( std::ostream &o, std::list< int > &list ) {
+	for (std::list< int >::iterator it = list.begin(); it != list.end(); it++) {
+		if (it != list.begin())
+			o << ", ";
+		o << *it;
+	}
+
+	return (o);
+}
