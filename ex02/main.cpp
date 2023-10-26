@@ -63,19 +63,19 @@ int main(int ac, char** av) {
 		gettimeofday(&end, NULL);
 		int lst_elapsed = end.tv_usec - start.tv_usec;
 
-		std::cout << "Input :";
+		std::cout << "Input\t\t:";
 		for (std::vector<int>::const_iterator it = vector_copy.begin(); it != vector_copy.end(); ++it) {
 			std::cout << " " << *it;
 		}
 		std::cout << std::endl;
 
-		std::cout << "Output (vector) :";
+		std::cout << "Output (vector)\t:";
 		for (std::vector<int>::const_iterator it = vector.begin(); it != vector.end(); ++it) {
 			std::cout << " " << *it;
 		}
 		std::cout << std::endl;
 
-		std::cout << "Output (list) :";
+		std::cout << "Output (list)\t:";
 		for (std::list<int>::const_iterator it = list.begin(); it != list.end(); ++it) {
 			std::cout << " " << *it;
 		}

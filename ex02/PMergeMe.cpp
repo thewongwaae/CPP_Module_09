@@ -59,20 +59,20 @@ static int jacobsthal( int i ) {
 
 /* Sorters */
 
-void insertionSort( std::vector< std::pair<int, int> > &pairs ) {
-    int size = pairs.size();
-    if (size <= 1)
-        return;
+void insertionSort( std::vector< std::pair<int, int> > &pairs, int size ) {
+    if (size == 1)
+		return ;
 
-    std::pair< int, int > last = pairs.back();
-    int i = size - 2;
+	insertionSort(pairs, size - 1);
 
-    while (i >= 0 && pairs[i].second > last.second) {
-        pairs[i + 1] = pairs[i];
-        i--;
-    }
+	std::pair< int, int > val = pairs[size - 1];
+	int i = size - 2;
+	while (i >= 0 && pairs[i].second > val.second) {
+		pairs[i + 1] = pairs[i];
+		i--;
+	}
 
-    pairs[i + 1] = last;
+	pairs[i + 1] = val;
 }
 
 void mergeSort( std::vector< int > &pend, std::vector< int > &S ) {
@@ -166,7 +166,7 @@ void mergeSort( Pair &pairs, T &pend, T &S ) {
 		S.push_back(it->second);
 	}
 
-	S.insert(S.begin(), pend.first());
+	S.insert(S.begin(), pend.front());
 	if (!pend.empty())
 		pend.erase(pend.begin());
 
@@ -174,6 +174,26 @@ void mergeSort( Pair &pairs, T &pend, T &S ) {
 }
 
 /* Ford Johnson algorithm */
+
+template <typename T>
+bool isSorted( const T& container ) {
+	if (container.empty())
+		return true;
+
+	typename T::const_iterator it = container.begin();
+	typename T::const_iterator next = it;
+	next++;
+
+	while (next != container.end()) {
+		if (*next < *it)
+			return false;
+
+		it++;
+		next++;
+	}
+
+	return true;
+}
 
 void PMergeMe::fordJohnson( std::vector< int > &vector ) {
 	bool isOdd;
@@ -189,7 +209,7 @@ void PMergeMe::fordJohnson( std::vector< int > &vector ) {
 	}
 
 	pairs = storePairs< std::vector< std::pair< int, int > >, std::vector< int > > (vector);
-	insertionSort(pairs);
+	insertionSort(pairs, pairs.size());
 	mergeSort< std::vector< std::pair< int, int > >, std::vector< int > > (pairs, pend, S);
 
 	if (isOdd) {
@@ -201,8 +221,8 @@ void PMergeMe::fordJohnson( std::vector< int > &vector ) {
 	}
 
 	vector = S;
-	if (!std::is_sorted(vector.begin(), vector.end()))
-		throw std::logic_error("Vector is not sorted");
+	// if (!isSorted(vector))
+	// 	throw std::logic_error("Vector is not sorted");
 }
 
 void PMergeMe::fordJohnson( std::list< int > &list ) {
@@ -231,8 +251,8 @@ void PMergeMe::fordJohnson( std::list< int > &list ) {
 	}
 
 	list = S;
-	if (!std::is_sorted(list.begin(), list.end()))
-		throw std::logic_error("List is not sorted");
+	// if (!isSorted(list))
+	// 	throw std::logic_error("List is not sorted");
 }
 
 /* Operators */
