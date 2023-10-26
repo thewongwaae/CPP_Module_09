@@ -9,6 +9,7 @@ PMergeMe::PMergeMe( const PMergeMe &copy ) {
 }
 
 PMergeMe &PMergeMe::operator=( const PMergeMe &assign ) {
+	(void) assign;
 	return *this;
 }
 
@@ -19,9 +20,8 @@ PMergeMe::~PMergeMe( void ) { }
 template< typename T >
 bool PMergeMe::checkIfOdd( T container ) {
 	if (container.size() % 2 == 0)
-		_isOdd = false;
-	else
-		_isOdd = true;
+		return false;
+	return true;
 }
 
 template< typename Pair, typename T >
@@ -59,21 +59,20 @@ static int jacobsthal( int i ) {
 
 /* Sorters */
 
-void insertionSort( std::vector<std::pair<int,int>> &pairs, int size ) {
-	if (size <= 1)
-		return ;
+void insertionSort( std::vector< std::pair<int, int> > &pairs ) {
+    int size = pairs.size();
+    if (size <= 1)
+        return;
 
-	insertionSort(pairs. size - 1);
+    std::pair< int, int > last = pairs.back();
+    int i = size - 2;
 
-	std::pair< int, int > last = pairs.back();
-	int i = size - 2;
+    while (i >= 0 && pairs[i].second > last.second) {
+        pairs[i + 1] = pairs[i];
+        i--;
+    }
 
-	while (i >= 0 && pairs[i].second > last.second) {
-		pairs[i + 1] = pairs[i];
-		i--;
-	}
-
-	pairs[i + 1] = last;
+    pairs[i + 1] = last;
 }
 
 void mergeSort( std::vector< int > &pend, std::vector< int > &S ) {
@@ -100,13 +99,13 @@ void mergeSort( std::vector< int > &pend, std::vector< int > &S ) {
 	}
 }
 
-void insertionSort( std::list<std::pair<int,int>> &pairs, int size ) {
-	std::list<std::pair<int,int>>::iterator curr = pairs.begin();
-	std::list<std::pair<int,int>>::iterator sorted = pairs.begin();
+void insertionSort( std::list< std::pair<int,int> > &pairs, int size ) {
+	std::list< std::pair<int,int> >::iterator curr = pairs.begin();
+	std::list< std::pair<int,int> >::iterator sorted = pairs.begin();
 
 	for (int i = 0; i < size; i++) {
 		std::pair< int, int > val = *curr;
-		std::list<std::pair<int,int>>::iterator correct = pairs.begin();
+		std::list< std::pair<int,int> >::iterator correct = pairs.begin();
 
 		while (correct != curr && correct->second < val.second)
 			correct++;
@@ -155,13 +154,14 @@ void mergeSort( std::list< int > &pend, std::list< int > &S ) {
 			tmp.insert(lower, *it);
 		}
 	}
+
 	pend.clear();
 	pend = tmp;
 }
 
 template< typename Pair, typename T >
 void mergeSort( Pair &pairs, T &pend, T &S ) {
-	for (typename Pair::iterator it = pairs.begin();i t != pairs.end(); it++) {
+	for (typename Pair::iterator it = pairs.begin(); it != pairs.end(); it++) {
 		pend.push_back(it->first);
 		S.push_back(it->second);
 	}
@@ -188,9 +188,9 @@ void PMergeMe::fordJohnson( std::vector< int > &vector ) {
 		vector.pop_back();
 	}
 
-	pairs = storePairs< std::vector<std::pair<int, int>>, std::vector<int> > (vector);
-	insertionSort(pairs, pairs.size());
-	mergeSort< std::vector<std::pair<int,int>>, std::vector<int> > (pairs, pend, S);
+	pairs = storePairs< std::vector< std::pair< int, int > >, std::vector< int > > (vector);
+	insertionSort(pairs);
+	mergeSort< std::vector< std::pair< int, int > >, std::vector< int > > (pairs, pend, S);
 
 	if (isOdd) {
 		std::vector< int >::iterator it = std::lower_bound(S.begin(), S.end(), oddValue);
@@ -218,9 +218,9 @@ void PMergeMe::fordJohnson( std::list< int > &list ) {
 		list.pop_back();
 	}
 
-	pairs = storePairs< std::list<std::pair<int, int>>, std::list<int> > (list);
+	pairs = storePairs< std::list< std::pair< int, int > >, std::list< int > > (list);
 	insertionSort(pairs, pairs.size());
-	mergeSort< std::list<std::pair<int,int>>, std::list<int> > (pairs, pend, S);
+	mergeSort< std::list< std::pair< int, int > >, std::list< int > > (pairs, pend, S);
 
 	if (isOdd) {
 		std::list< int >::iterator it = std::lower_bound(S.begin(), S.end(), oddValue);
