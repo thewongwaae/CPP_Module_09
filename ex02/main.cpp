@@ -27,6 +27,26 @@ static void checkDup(T container) {
 	}
 }
 
+template <typename T>
+static bool isSorted( const T& container ) {
+	if (container.empty())
+		return true;
+
+	typename T::const_iterator it = container.begin();
+	typename T::const_iterator next = it;
+	next++;
+
+	while (next != container.end()) {
+		if (*next < *it)
+			return false;
+
+		it++;
+		next++;
+	}
+
+	return true;
+}
+
 int main(int ac, char** av) {
 	struct timeval start;
 	struct timeval end;
@@ -41,6 +61,11 @@ int main(int ac, char** av) {
 		return 1;
 	}
 
+	if (ac == 2) {
+		std::cerr << "Error: only one argument given" << std::endl;
+		return 1;
+	}
+
 	try {
 		for (int i = 1; i < ac; i++) {
 			if (!isValidNum(av[i]))
@@ -49,6 +74,9 @@ int main(int ac, char** av) {
 			list.push_back(atoi(av[i]));
 			vector_copy.push_back(atoi(av[i]));
 		}
+
+		if (isSorted(vector))
+			throw std::logic_error("Input is already sorted");
 
 		checkDup(vector);
 		checkDup(list);

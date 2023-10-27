@@ -93,7 +93,7 @@ void mergeSort( std::vector< int > &pend, std::vector< int > &S ) {
 	for (int i = 0; i < pendSize; i ++) {
 		if (pend[i] != -1) {
 			std::vector< int >::iterator it = std::lower_bound(S.begin(), S.end(), pend[i]);
-			S.insert(S.begin() + (it - S.begin()), pend[i]);
+			S.insert(it, pend[i]);
 			tmp.push_back(pend[i]);
 		}
 	}
@@ -176,7 +176,7 @@ void mergeSort( Pair &pairs, T &pend, T &S ) {
 /* Ford Johnson algorithm */
 
 template <typename T>
-bool isSorted( const T& container ) {
+static bool isSorted( const T& container ) {
 	if (container.empty())
 		return true;
 
