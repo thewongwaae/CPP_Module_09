@@ -12,6 +12,7 @@
 #include <iomanip>
 
 #define GREEN "\033[32m"
+#define RED "\033[31m"
 #define CLEAR "\033[0m"
 
 class PMergeMe {

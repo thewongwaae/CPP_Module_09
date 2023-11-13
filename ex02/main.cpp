@@ -94,8 +94,8 @@ int main(int ac, char** av) {
 		/* END SORT */
 
 		std::cout << "Input\t\t:" << vector_copy << std::endl;
-		std::cout << "Output (vector)\t:" << vector << std::endl;
-		std::cout << "Output (list)\t:" << list << std::endl;
+		std::cout << GREEN << "Output (vector)\t:" << vector << std::endl;
+		std::cout << RED << "Output (list)\t:" << list << CLEAR << std::endl;
 
 		std::cout << "\nTime to process a range of " << vector.size() << " elements (vector) : "
 				<< vec_elapsed << " microseconds" << std::endl;
