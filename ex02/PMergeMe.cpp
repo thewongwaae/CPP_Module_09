@@ -24,6 +24,18 @@ bool PMergeMe::checkIfOdd( T container ) {
 	return true;
 }
 
+/**
+ * @brief Stores pairs of elements from a container.
+ * 
+ * This function takes a container and stores pairs of elements from it. 
+ * Each pair consists of two consecutive elements from the container. 
+ * The pairs are stored in a new container of type Pair.
+ * 
+ * @tparam Pair The type of the container to store the pairs.
+ * @tparam T The type of the input container.
+ * @param container The input container.
+ * @return Pair The container storing the pairs.
+ */
 template< typename Pair, typename T >
 Pair storePairs( T container ) {
 	typename T::iterator it;
@@ -48,6 +60,14 @@ Pair storePairs( T container ) {
 	return (res);
 }
 
+/**
+ * Calculates the Jacobsthal number for a given integer.
+ * The Jacobsthal sequence is a sequence of numbers similar to the Fibonacci sequence,
+ * where each number is the sum of the two preceding numbers multiplied by 2.
+ *
+ * @param i The index of the Jacobsthal number to calculate.
+ * @return The Jacobsthal number at the given index.
+ */
 static int jacobsthal( int i ) {
 	if (i == 0)
 		return 0;
@@ -59,6 +79,12 @@ static int jacobsthal( int i ) {
 
 /* Sorters */
 
+/**
+ * Sorts a vector of pairs in ascending order based on the second element of each pair using the insertion sort algorithm.
+ * 
+ * @param pairs The vector of pairs to be sorted.
+ * @param size The size of the vector.
+ */
 void insertionSort( std::vector< std::pair<int, int> > &pairs, int size ) {
     if (size == 1)
 		return ;
@@ -75,6 +101,23 @@ void insertionSort( std::vector< std::pair<int, int> > &pairs, int size ) {
 	pairs[i + 1] = val;
 }
 
+/**
+ * @brief Sorts the given vector `pend` using the merge sort algorithm and merges it with vector `S`.
+ * 
+ * The mergeSort function sorts the elements in the `pend` vector using the merge sort algorithm, which is a divide-and-conquer algorithm.
+ * It recursively divides the vector into smaller subvectors, sorts them individually, and then merges them back together to obtain the final sorted vector.
+ * The sorted `pend` vector is then merged with the `S` vector, resulting in a merged vector with the elements from both vectors in sorted order.
+ * 
+ * @param pend The vector to be sorted and merged.
+ * @param S The vector to be merged with the sorted `pend` vector.
+ * 
+ * @details The mergeSort function modifies the `pend` vector in-place and does not return any value.
+ * The `S` vector is also modified as a result of the merging process.
+ * 
+ * @note The mergeSort function assumes that the `pend` vector is not empty and that both `pend` and `S` vectors contain integers.
+ * 
+ * @see merge
+ */
 void mergeSort( std::vector< int > &pend, std::vector< int > &S ) {
 	std::vector< int > tmp;
 	int pendSize = pend.size();
@@ -99,6 +142,12 @@ void mergeSort( std::vector< int > &pend, std::vector< int > &S ) {
 	}
 }
 
+/**
+ * Sorts a list of pairs in ascending order based on the second element of each pair using insertion sort algorithm.
+ * 
+ * @param pairs The list of pairs to be sorted.
+ * @param size The size of the list.
+ */
 void insertionSort( std::list< std::pair<int,int> > &pairs, int size ) {
 	std::list< std::pair<int,int> >::iterator curr = pairs.begin();
 	std::list< std::pair<int,int> >::iterator sorted = pairs.begin();
@@ -121,6 +170,14 @@ void insertionSort( std::list< std::pair<int,int> > &pairs, int size ) {
 	}
 }
 
+/**
+ * @brief Sorts the given list `pend` using the merge sort algorithm and inserts the elements into list `S`.
+ * 
+ * The mergeSort function takes a list `pend` and sorts it in ascending order using the merge sort algorithm. The sorted elements are then inserted into the list `S`. The merge sort algorithm works by recursively dividing the list into smaller sublists, sorting them individually, and then merging them back together.
+ * 
+ * @param pend The list to be sorted.
+ * @param S The list to insert the sorted elements into.
+ */
 void mergeSort( std::list< int > &pend, std::list< int > &S ) {
 	std::list< int > tmp;
 	int pendSize = pend.size();
@@ -221,8 +278,6 @@ void PMergeMe::fordJohnson( std::vector< int > &vector ) {
 	}
 
 	vector = S;
-	// if (!isSorted(vector))
-	// 	throw std::logic_error("Vector is not sorted");
 }
 
 void PMergeMe::fordJohnson( std::list< int > &list ) {
@@ -251,8 +306,6 @@ void PMergeMe::fordJohnson( std::list< int > &list ) {
 	}
 
 	list = S;
-	// if (!isSorted(list))
-	// 	throw std::logic_error("List is not sorted");
 }
 
 /* Operators */
