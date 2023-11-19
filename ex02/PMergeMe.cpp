@@ -86,7 +86,7 @@ static int jacobsthal( int i ) {
  * @param size The size of the vector.
  */
 void insertionSort( std::vector< std::pair<int, int> > &pairs, int size ) {
-    if (size == 1)
+	if (size == 1)
 		return ;
 
 	insertionSort(pairs, size - 1);
@@ -129,7 +129,7 @@ void mergeSort( std::vector< int > &pend, std::vector< int > &S ) {
 
 		tmp.push_back(pend[jct - 1]);
 		std::vector< int >::iterator it = std::lower_bound(S.begin(), S.end(), pend[jct - 1]);
-		S.insert(S.begin(), + (it - S.begin()), pend[jct - 1]);
+		S.insert(S.begin() + (it - S.begin()), pend[jct - 1]);
 		pend[jct - 1] = -1;
 	}
 
@@ -226,7 +226,6 @@ void mergeSort( Pair &pairs, T &pend, T &S ) {
 	S.insert(S.begin(), pend.front());
 	if (!pend.empty())
 		pend.erase(pend.begin());
-
 	mergeSort(pend, S);
 }
 
@@ -258,6 +257,9 @@ void PMergeMe::fordJohnson( std::vector< int > &vector ) {
 	std::vector< std::pair< int, int > > pairs;
 	std::vector< int > pend;
 	std::vector< int > S;
+	
+	pend.clear();
+	S.clear();
 
 	isOdd = checkIfOdd(vector);
 	if (isOdd) {
@@ -286,6 +288,9 @@ void PMergeMe::fordJohnson( std::list< int > &list ) {
 	std::list< std::pair< int, int > > pairs;
 	std::list< int > pend;
 	std::list< int > S;
+	
+	pend.clear();
+	S.clear();
 
 	isOdd = checkIfOdd(list);
 	if (isOdd) {
